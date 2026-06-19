@@ -1,0 +1,148 @@
+/* Login.css */
+
+/* === НАСТРОЙКА ВСЕЙ СТРАНИЦЫ === */
+/* Это контейнер на всю страницу, который центрирует форму */
+.login-container {
+  display: flex;           /* Включаем гибкую вёрстку */
+  justify-content: center; /* Выравнивание по горизонтали (центр) */
+  align-items: center;     /* Выравнивание по вертикали (центр) */
+  width: 1920px;
+  height: 1080px; 
+  background-color: #ffffff; /* Фоновый цвет страницы (можно поменять) */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* === САМА ФОРМА === */
+.login-form {
+  width: 759px;
+  height: auto;           
+  min-height: 700px;      
+  padding: 50px 30px 50px 30px;  
+  background-color: #FFFFFF;
+  border: 2px solid #2E141F;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0px 0px 50px 25px rgba(115, 48, 77, 0.15);
+}
+
+/* === БЛОК С ЛОГОТИПОМ, ЗАГОЛОВКОМ И ПОДЗАГОЛОВКОМ === */
+.header-block {
+  display: flex;           /* Гибкая вёрстка */
+  flex-direction: column;  /* В колонку */
+  align-items: center;     /* По центру по горизонтали */
+  gap: 10px;               /* Отступ между элементами = 10px */
+  margin-bottom: 10px;     /* Дополнительный отступ снизу (можете убрать) */
+}
+
+/* === ЛОГОТИП === */
+.logo {
+  width: 70px;             /* Ширина 70px */
+  height: 70px;            /* Высота 70px */
+  border-radius: 50%;      /* Закругление 50% = круг */
+  background-color: #5CBFC7; /* Фоновый цвет логотипа */
+  display: flex;           /* Гибкая вёрстка */
+  justify-content: center; /* Центрирование картинки по горизонтали */
+  align-items: center;     /* Центрирование картинки по вертикали */
+  overflow: hidden;        /* Чтобы картинка не выходила за круг */
+}
+
+.logo img {
+  width: 100%;             /* Картинка занимает всю ширину логотипа */
+  height: 100%;            /* Картинка занимает всю высоту логотипа */
+  object-fit: contain;     /* Картинка сохраняет пропорции */
+}
+
+/* === ЗАГОЛОВОК "Табель посещения" === */
+.title {
+  font-family: 'Libertinus Serif Display', serif; /* Шрифт */
+  font-weight: 400;        /* Толщина Regular (обычная) */
+  font-size: 40px;         /* Размер шрифта 40px */
+  text-align: center;      /* Выравнивание по центру */
+  color: #000000;          /* Чёрный цвет */
+  margin: 0;               /* Убираем отступы по умолчанию */
+  line-height: 1.2;        /* Межстрочный интервал */
+}
+
+/* === ПОДЗАГОЛОВОК === */
+.subtitle {
+  font-family: 'Libertinus Serif Display', serif; /* Шрифт */
+  font-weight: 400;        /* Толщина Regular */
+  font-size: 24px;         /* Размер шрифта 24px */
+  text-align: center;      /* Выравнивание по центру */
+  color: rgba(0, 0, 0, 0.7);          /* Чёрный цвет */
+  margin: 0;               /* Убираем отступы по умолчанию */
+  line-height: 1.2;        /* Межстрочный интервал */
+}
+
+/* === ОБЩИЕ НАСТРОЙКИ ДЛЯ ВСЕХ ПОЛЕЙ ВВОДА === */
+.input-field {
+  width: 679px;            /* Ширина поля */
+  height: 118px;           /* Высота поля */
+}
+
+.input-field input {
+  width: 100%;             /* Растягиваем на всю ширину контейнера */
+  height: 100%;            /* Растягиваем на всю высоту контейнера */
+  padding: 10px 25px;      /* Внутренние отступы: сверху/снизу 10px, слева 25px */
+  border-radius: 50px;     /* Закругление 50px */
+  border: 3px solid #2E141F; /* Рамка: толщина 3px, цвет #2E141F */
+  background-color: rgba(92, 191, 199, 0.15); /* Цвет #5CBFC7 с прозрачностью 15% */
+  font-family: 'Libertinus Serif Display', serif; /* Шрифт */
+  font-weight: 400;        /* Толщина Regular */
+  font-size: 40px;         /* Размер шрифта 40px */
+  text-align: left;        /* Выравнивание текста по левому краю */
+  color: rgba(202, 202, 202, 0.7); /* Цвет #CACACA с прозрачностью 70% */
+  outline: none;           /* Убираем стандартную синюю обводку при фокусе */
+  box-sizing: border-box;  /* Чтобы padding и border входили в размеры */
+  transition: all 0.3s ease; /* Плавный переход для всех изменений */
+}
+
+/* === СОСТОЯНИЕ HOVER (при наведении мыши) === */
+.input-field input:hover {
+  background-color: rgba(92, 191, 199, 0.35); /* Цвет с прозрачностью 35% */
+  color: rgba(164, 163, 163, 0.7); /* Цвет #A4A3A3 с прозрачностью 70% */
+}
+
+/* === СОСТОЯНИЕ ACTIVE/FOCUS (когда нажали на поле) === */
+.input-field input:focus {
+  background-color: rgba(92, 191, 199, 0.35); /* Цвет с прозрачностью 35% */
+  color: #2E141F;      /* Цвет вводимого текста */
+}
+
+/* === Убираем плейсхолдер при фокусе === */
+.input-field input:focus::placeholder {
+  color: transparent;      /* Делаем плейсхолдер прозрачным */
+}
+
+/* === КНОПКА "ВОЙТИ" === */
+.login-button {
+  width: 206px;            /* Ширина кнопки */
+  height: 78px;            /* Высота кнопки */
+  border-radius: 100px;    /* Закругление 100px */
+  border: none;            /* Убираем рамку */
+  background-color: #AB5F59; /* Цвет фона */
+  font-family: 'Libertinus Serif Display', serif; /* Шрифт */
+  font-weight: 400;        /* Толщина Regular */
+  font-size: 32px;         /* Размер шрифта 32px */
+  text-align: center;      /* Выравнивание по центру */
+  color: #FFFFFF;          /* Белый цвет текста */
+  padding: 14px 60px;      /* Внутренние отступы: сверху/снизу 14px, слева/справа 60px */
+  cursor: pointer;         /* Меняем курсор на указатель (рука) */
+  box-shadow: 0px 0px 30px 0px rgba(171, 95, 89, 0.35); /* Тень:
+    0px по X, 0px по Y, размытие 30px, распространение 0px,
+    цвет #AB5F59 с прозрачностью 35% */
+  transition: all 0.2s ease; /* Плавный переход */
+  box-sizing: border-box;  /* Чтобы padding входил в размеры */
+}
+
+/* === СОСТОЯНИЕ ACTIVE (когда кнопка нажата) === */
+.login-button:active {
+  box-shadow: inset 0px 5px 15px 0px #2E141F; /* Внутренняя тень:
+    0px по X, 5px по Y, размытие 15px, распространение 0px,
+    цвет #2E141F */
+  transform: scale(0.98);  /* Легкое уменьшение для эффекта нажатия */
+}
