@@ -1,0 +1,52 @@
+.button {
+  // Базовые настройки
+  background: #AB5F59;
+  border: none;
+  cursor: pointer;
+  gap: 0;
+  
+  // Отступы: 14px сверху/снизу, 60px слева/справа
+  padding: 14px 60px;
+  
+  // Закругление 100
+  border-radius: 100px;
+  
+  // Текст
+  color: #FFFFFF;
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 32px;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  
+  // Ширина на всю форму (100% от родителя)
+  width: 338px;
+  
+  // Чтобы кнопка не выходила за пределы родителя
+  box-sizing: border-box;
+  
+  // Состояние Default: Drop shadow
+  box-shadow: 0px 0px 30px 0px rgba(171, 95, 89, 0.35);
+  
+  // Плавный переход для hover
+  transition: all 0.2s ease;
+  
+  // Состояние Hover (активируется при нажатии)
+  &:active:not(:disabled) {
+    // Inner shadow
+    box-shadow: inset 0px 5px 15px 0px #2E141F;
+    background: #AB5F59;
+    border-radius: 100px;
+  }
+  
+  // Если кнопка disabled
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &:active {
+      box-shadow: 0px 0px 30px 0px rgba(171, 95, 89, 0.35);
+      border-radius: 100px;
+    }
+  }
+}

@@ -1,0 +1,98 @@
+.inputWrapper {
+  // Размеры: ширина зависит от родителя, высота фиксированная
+  width: 100%;
+  height: 118px;
+  
+  // Отступы между элементами
+  gap: 10px;
+  
+  // Убираем лишние отступы
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  // Базовые настройки
+  width: 100%;
+  height: 118px;
+  
+  // Отступы: 25px слева/справа, 10px сверху/снизу
+  padding: 10px 25px;
+  
+  // Закругление 50
+  border-radius: 50px;
+  
+  // Внутренняя рамка: weight 3, цвет #2E141F
+  border: 3px solid #2E141F;
+  
+  // Фон: Default состояние
+  background: rgba(92, 191, 199, 0.15);
+  
+  // Текст
+  color: #CACACA;
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 40px;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: left;
+  
+  // Прозрачность текста 70%
+  opacity: 0.7;
+  
+  // Фиксированная высота для текста (не влияет на поле)
+  min-height: 98px;
+  
+  // Убираем стандартные стили браузера
+  outline: none;
+  
+  // Плавный переход для всех состояний
+  transition: all 0.3s ease;
+  
+  // Плейсхолдер
+  &::placeholder {
+    color: #CACACA;
+    opacity: 0.7;
+    font-family: 'Libertinus Serif Display', serif;
+    font-size: 40px;
+  }
+  
+  // Состояние Hover (при наведении)
+  &:hover:not(:disabled) {
+    background: rgba(92, 191, 199, 0.35);
+    border: 3px solid #2E141F;
+    border-radius: 50px;
+  }
+  
+  // Состояние Active (при нажатии/фокусе)
+  &:focus:not(:disabled),
+  &.active {
+    background: rgba(92, 191, 199, 0.15);
+    border: 3px solid #2E141F;
+    border-radius: 50px;
+    opacity: 1; // Прозрачность текста 70% сохраняется через цвет
+    
+    // Цвет текста остаётся #CACACA с прозрачностью 70%
+    color: #CACACA;
+    opacity: 1;
+    
+    &::placeholder {
+      opacity: 0.7;
+    }
+  }
+  
+  // Когда поле активно и в нём есть текст
+  &:focus:not(:disabled):not(:placeholder-shown) {
+    color: #CACACA;
+    opacity: 1;
+  }
+  
+  // Состояние Disabled
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &:hover {
+      background: rgba(92, 191, 199, 0.15);
+    }
+  }
+}
