@@ -24,15 +24,12 @@
   // Центрирование содержимого по вертикали
   justify-content: center;
   align-items: center;
-  
-  // Важно: чтобы все дочерние элементы растягивались на всю ширину
-  // Но при этом центрировались по горизонтали
 }
 
 .headerBlock {
   text-align: center;
   margin-bottom: 30px;
-  width: 100%; // Занимает всю ширину формы
+  width: 100%;
 }
 
 .logo {
@@ -40,7 +37,7 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 40px;
   font-weight: 600;
   color: #1a1a1a;
   margin-bottom: 8px;
@@ -48,14 +45,36 @@
 
 .subtitle {
   color: #666;
-  font-size: 14px;
+  font-size: 24px;
 }
 
 .inputField {
-  width: 100%; // Поля ввода занимают всю ширину формы
+  width: 100%;
 }
 
-// Убеждаемся, что кнопка растягивается
-.loginButton {
-  width: 338px; // Если используете кнопку напрямую
+// Стили для сообщения об ошибке
+.errorMessage {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4d4f;
+  border-radius: 8px;
+  color: #ff4d4f;
+  font-size: 14px;
+  text-align: center;
+  font-family: 'Libertinus Serif Display', serif;
+  animation: shake 0.3s ease-in-out;
+}
+
+// Анимация для сообщения об ошибке
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
 }

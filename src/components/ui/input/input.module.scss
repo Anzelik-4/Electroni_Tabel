@@ -28,16 +28,16 @@
   // Фон: Default состояние
   background: rgba(92, 191, 199, 0.15);
   
-  // Текст
-  color: #CACACA;
+  // Текст - изменён на #000000 с прозрачностью 70%
+  color: rgba(0, 0, 0, 0.7);
   font-family: 'Libertinus Serif Display', serif;
   font-size: 40px;
   line-height: 1;
   white-space: nowrap;
   text-align: left;
   
-  // Прозрачность текста 70%
-  opacity: 0.7;
+  // Убираем opacity, так как теперь прозрачность задана через rgba
+  // opacity: 0.7; // УДАЛЕНО
   
   // Фиксированная высота для текста (не влияет на поле)
   min-height: 98px;
@@ -48,10 +48,9 @@
   // Плавный переход для всех состояний
   transition: all 0.3s ease;
   
-  // Плейсхолдер
+  // Плейсхолдер - изменён на #000000 с прозрачностью 70%
   &::placeholder {
-    color: #CACACA;
-    opacity: 0.7;
+    color: rgba(0, 0, 0, 0.7);
     font-family: 'Libertinus Serif Display', serif;
     font-size: 40px;
   }
@@ -69,21 +68,18 @@
     background: rgba(92, 191, 199, 0.15);
     border: 3px solid #2E141F;
     border-radius: 50px;
-    opacity: 1; // Прозрачность текста 70% сохраняется через цвет
     
-    // Цвет текста остаётся #CACACA с прозрачностью 70%
-    color: #CACACA;
-    opacity: 1;
+    // Цвет текста остаётся #000000 с прозрачностью 70%
+    color: rgba(0, 0, 0, 0.7);
     
     &::placeholder {
-      opacity: 0.7;
+      color: rgba(0, 0, 0, 0.7);
     }
   }
   
   // Когда поле активно и в нём есть текст
   &:focus:not(:disabled):not(:placeholder-shown) {
-    color: #CACACA;
-    opacity: 1;
+    color: rgba(0, 0, 0, 0.7);
   }
   
   // Состояние Disabled

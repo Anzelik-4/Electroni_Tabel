@@ -1,60 +1,86 @@
-// router.tsx
 import { Routes, Route, Navigate } from 'react-router-dom';
 import type { ReactNode } from 'react';
-// import type { ReactNode } from 'react';
-// Импортируйте ваши страницы (создайте их позже)
 import Login from '../components/pages/login/login.tsx';
 import { MainStudent } from '../components/pages/mainStudent/mainStudent.tsx';
-// Компонент для защиты маршрутов (опционально)
+import { MainTeacher } from '../components/pages/mainTeacher/mainTeacher.tsx';
+import { AppLayout } from '../components/layout/appLayout/appLayout.tsx';
+import { getUserRole, isAuthenticated, type UserRole } from '../utils/auth';
+
 interface ProtectedRouteProps {
   children: ReactNode;
-  role?: 'student' | 'teacher';
+  role: UserRole;
 }
+
 const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
-  // Здесь ваша логика проверки авторизации
-  const isAuthenticated = localStorage.getItem('token') !== null;
-  const userRole = localStorage.getItem('role') as 'student' | 'teacher' | null;
-  if (!isAuthenticated) {
+  if (!isAuthenticated()) {
     return <Navigate to="/login" replace />;
   }
-  if (role && userRole !== role) {
-    return <Navigate to="/" replace />;
+  
+  if (getUserRole() !== role) {
+    return <Navigate to="/login" replace />;
+  }
+  
+  return <>{children}</>;
+};
+
+const PublicRoute = ({ children }: { children: ReactNode }) => {
+  if (isAuthenticated()) {
+    const role = getUserRole();
+    if (role === 'student') {
+      return <Navigate to="/student" replace />;
+    } else if (role === 'teacher') {
+      return <Navigate to="/teacher" replace />;
+    }
   }
   return <>{children}</>;
 };
-// Основной компонент маршрутизации
+
 export const Router = () => {
   return (
     <Routes>
-      {/* Публичные маршруты */}
-      <Route path="/login" element={<Login />} />
-      {/* Защищенные маршруты */}
-      <Route
-        path="/"
+      {/* Страница логина без шапки */}
+      <Route 
+        path="/login" 
         element={
-          <ProtectedRoute>
-            <MainStudent />
-          </ProtectedRoute>
-        }
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        } 
       />
-      {/* <Route
-        path="/student"
-        element={
-          <ProtectedRoute role="student">
-            <StudentDashboard />
-          </ProtectedRoute>
-        }
+      
+      {/* Все защищённые страницы с шапкой */}
+      <Route element={<AppLayout />}>
+        <Route
+          path="/student"
+          element={
+            <ProtectedRoute role="student">
+              <MainStudent />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/teacher"
+          element={
+            <ProtectedRoute role="teacher">
+              <MainTeacher />
+            </ProtectedRoute>
+          }
+        />
+        
+        {/* Дополнительные страницы можно добавлять сюда */}
+        {/* <Route path="/student/schedule" element={<StudentSchedule />} /> */}
+        {/* <Route path="/teacher/groups" element={<TeacherGroups />} /> */}
+      </Route>
+      
+      {/* Корневой путь */}
+      <Route 
+        path="/" 
+        element={<Navigate to="/login" replace />} 
       />
-      <Route
-        path="/teacher"
-        element={
-          <ProtectedRoute role="teacher">
-            <TeacherDashboard />
-          </ProtectedRoute>
-        }
-      /> */}
-      {/* 404 страница /}
-      {/ <Route path="*" element={<NotFoundPage />} /> */}
+      
+      {/* Все остальные пути */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 };

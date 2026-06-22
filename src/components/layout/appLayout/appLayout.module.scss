@@ -1,0 +1,27 @@
+.appLayout {
+    // Весь экран
+    min-height: 100vh;
+    
+    // Расположение колонкой (шапка сверху, контент снизу)
+    display: flex;
+    flex-direction: column;
+    
+    // Фон для всей страницы
+    background: #f0f2f5;
+  }
+  
+  .content {
+    // Заполняет оставшееся пространство
+    flex: 1;
+    
+    // Внутренние отступы для контента
+    padding: 20px;
+    
+    // Расположение контента по центру
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    
+    // Чтобы контент не выходил за пределы
+    overflow-y: auto;
+  }

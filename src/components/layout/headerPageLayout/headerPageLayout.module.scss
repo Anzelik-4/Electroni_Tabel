@@ -1,0 +1,116 @@
+.header {
+    // Форма
+    width: 100%; // W Fill
+    height: auto; // H - Hug
+    
+    // Внутренние отступы
+    padding: 10px;
+    
+    // Отступы между элементами
+    gap: 10px;
+    
+    // Фон с прозрачностью
+    background: rgba(171, 95, 89, 0.35);
+    
+    // Расположение элементов в одну строку
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    // Чтобы размеры работали правильно
+    box-sizing: border-box;
+  }
+  
+  // Левая секция: логотип + заголовок/подзаголовок
+  .leftSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  // Группа заголовка и подзаголовка
+  .titleGroup {
+    // Внутренние отступы
+    padding: 17px;
+    
+    // Отступы между элементами
+    gap: 5px;
+    
+    // Расположение друг под другом
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .title {
+    // Текст
+    font-family: 'Libertinus Serif Display', serif;
+    font-size: 32px;
+    font-weight: 400; // Regular
+    color: #000000;
+    
+    // Всегда в одну строку
+    white-space: nowrap;
+    
+    // Сброс стандартных отступов
+    margin: 0;
+  }
+  
+  .subtitle {
+    // Текст
+    font-family: 'Libertinus Serif Display', serif;
+    font-size: 24px;
+    font-weight: 400; // Regular
+    color: #000000;
+    
+    // Всегда в одну строку
+    white-space: nowrap;
+    
+    // Сброс стандартных отступов
+    margin: 0;
+  }
+  
+  // Правая секция: ФИО + роль + кнопка
+  .rightSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  // Группа ФИО и роли
+  .userGroup {
+    // Внутренние отступы
+    padding: 10px;
+    
+    // Отступы между элементами
+    gap: 5px;
+    
+    // Расположение друг под другом
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .userName {
+    // Текст
+    font-family: 'Libertinus Serif Display', serif;
+    font-size: 32px;
+    font-weight: 400; // Regular
+    color: #000000;
+    
+    // Всегда в одну строку
+    white-space: nowrap;
+  }
+  
+  .userRole {
+    // Текст
+    font-family: 'Libertinus Serif Display', serif;
+    font-size: 24px;
+    font-weight: 400; // Regular
+    color: #000000;
+    
+    // Всегда в одну строку
+    white-space: nowrap;
+  }
+  
+  // Удалён .logoutButton - теперь кнопка использует стандартные стили из компонента Button

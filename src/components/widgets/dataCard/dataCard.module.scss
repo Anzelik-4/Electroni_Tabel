@@ -1,0 +1,74 @@
+.dataCard {
+    // Минимальные размеры
+    min-width: 597px;
+    min-height: 360px;
+    
+    // Внутренние отступы
+    padding: 30px 80px;
+    
+    // Отступы между элементами
+    gap: 45px;
+    
+    // Закругление
+    border-radius: 25px;
+    
+    // Фон
+    background: #73304D;
+    
+    // Внутренняя рамка
+    border: 3px solid #2E141F;
+    
+    // Для управления расположением элементов
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    // Чтобы размеры работали правильно
+    box-sizing: border-box;
+  }
+  
+  .title {
+    // Текст
+    font-family: 'Libertinus Serif Display', serif;
+    font-size: 48px;
+    font-weight: 400; // Regular
+    color: #FFFFFF;
+    text-align: center;
+    
+    // Всегда в одну строку
+    white-space: nowrap;
+    
+    // Внутренние отступы (границы текста)
+    padding: 10px;
+    
+    // Отступы между элементами
+    gap: 10px;
+    
+    // Сброс стандартных отступов
+    margin: 0;
+  }
+  
+  .content {
+    // Текст
+    font-family: 'Libertinus Serif Display', serif;
+    font-size: 36px;
+    font-weight: 400; // Regular
+    color: #FFFFFF;
+    text-align: center;
+    
+    // Auto height (высота зависит от контента)
+    height: auto;
+    
+    // Внутренние отступы (границы текста)
+    padding: 10px;
+    
+    // Отступы между элементами
+    gap: 10px;
+    
+    // Сброс стандартных отступов
+    margin: 0;
+    
+    // Перенос текста при необходимости
+    word-wrap: break-word;
+  }
