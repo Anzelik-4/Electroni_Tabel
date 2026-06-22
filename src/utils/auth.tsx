@@ -1,34 +1,42 @@
-export type UserRole = 'student' | 'teacher' | null;
+import type { User, UserRole } from '../types/user';
 
-// Храним данные в localStorage для сохранения между сессиями
-const AUTH_KEY = 'isAuthenticated';
-const ROLE_KEY = 'userRole';
+const TOKEN_KEY = 'token';
+const USER_KEY = 'user';
 
-export const setAuthenticated = (value: boolean): void => {
-  localStorage.setItem(AUTH_KEY, String(value));
+export type { User, UserRole };
+
+/** Сохранить сессию после успешного входа */
+export const setAuth = (user: User, token: string): void => {
+  localStorage.setItem(TOKEN_KEY, token);
+  localStorage.setItem(USER_KEY, JSON.stringify(user));
 };
 
-export const isAuthenticated = (): boolean => {
-  return localStorage.getItem(AUTH_KEY) === 'true';
-};
+/** Получить токен текущей сессии */
+export const getToken = (): string | null => localStorage.getItem(TOKEN_KEY);
 
-export const setUserRole = (role: UserRole): void => {
-  if (role) {
-    localStorage.setItem(ROLE_KEY, role);
-  } else {
-    localStorage.removeItem(ROLE_KEY);
+/** Получить профиль текущего пользователя */
+export const getUser = (): User | null => {
+  const data = localStorage.getItem(USER_KEY);
+
+  if (!data) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(data) as User;
+  } catch {
+    return null;
   }
 };
 
-export const getUserRole = (): UserRole => {
-  const role = localStorage.getItem(ROLE_KEY);
-  if (role === 'student' || role === 'teacher') {
-    return role;
-  }
-  return null;
-};
+/** Получить роль (student / teacher) */
+export const getUserRole = (): UserRole | null => getUser()?.role ?? null;
 
+/** Проверка: пользователь авторизован? */
+export const isAuthenticated = (): boolean => getToken() !== null;
+
+/** Выход: очистить сессию */
 export const logout = (): void => {
-  localStorage.removeItem(AUTH_KEY);
-  localStorage.removeItem(ROLE_KEY);
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(USER_KEY);
 };

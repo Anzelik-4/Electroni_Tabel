@@ -23,18 +23,14 @@ export const HeaderPageLayout: React.FC<HeaderPageLayoutProps> = ({
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Очищаем данные авторизации
     logout();
-    // Перенаправляем на страницу авторизации
     navigate('/login');
   };
 
-  // Определяем текст роли для отображения
   const roleText = userRole === 'student' ? 'Студент' : 'Преподаватель';
 
   return (
     <header className={`${styles.header} ${className}`}>
-      {/* Левая часть: Логотип + заголовок/подзаголовок */}
       <div className={styles.leftSection}>
         <Logo />
         
@@ -44,14 +40,12 @@ export const HeaderPageLayout: React.FC<HeaderPageLayoutProps> = ({
         </div>
       </div>
 
-      {/* Правая часть: ФИО + роль + кнопка выхода */}
       <div className={styles.rightSection}>
         <div className={styles.userGroup}>
           <span className={styles.userName}>{userName}</span>
           <span className={styles.userRole}>{roleText}</span>
         </div>
         
-        {/* Кнопка выхода с стандартными размерами из компонента Button */}
         <Button onClick={handleLogout}>
           Выйти
         </Button>

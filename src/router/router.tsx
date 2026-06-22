@@ -15,11 +15,11 @@ const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
   if (!isAuthenticated()) {
     return <Navigate to="/login" replace />;
   }
-  
+
   if (getUserRole() !== role) {
     return <Navigate to="/login" replace />;
   }
-  
+
   return <>{children}</>;
 };
 
@@ -38,7 +38,6 @@ const PublicRoute = ({ children }: { children: ReactNode }) => {
 export const Router = () => {
   return (
     <Routes>
-      {/* Страница логина без шапки */}
       <Route 
         path="/login" 
         element={
@@ -48,7 +47,6 @@ export const Router = () => {
         } 
       />
       
-      {/* Все защищённые страницы с шапкой */}
       <Route element={<AppLayout />}>
         <Route
           path="/student"
@@ -67,19 +65,9 @@ export const Router = () => {
             </ProtectedRoute>
           }
         />
-        
-        {/* Дополнительные страницы можно добавлять сюда */}
-        {/* <Route path="/student/schedule" element={<StudentSchedule />} /> */}
-        {/* <Route path="/teacher/groups" element={<TeacherGroups />} /> */}
       </Route>
       
-      {/* Корневой путь */}
-      <Route 
-        path="/" 
-        element={<Navigate to="/login" replace />} 
-      />
-      
-      {/* Все остальные пути */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );

@@ -1,0 +1,23 @@
+{
+  "teachers": [
+    {
+      "id": "1",
+      "login": "teacher",
+      "password": "teacher123",
+      "fullName": "Смирнов Алексей Владимирович"
+    }
+  ],
+  "students": [
+    {
+      "id": "1",
+      "login": "student1",
+      "password": "student123",
+      "fullName": "Кузнецов Артём Александрович",
+      "groupId": 1
+    }
+  ],
+  "groups": [],
+  "disciplines": [],
+  "attendance": [],
+  "polls": []
+}
