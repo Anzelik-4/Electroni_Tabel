@@ -5,6 +5,30 @@
       "login": "teacher",
       "password": "teacher123",
       "fullName": "Смирнов Алексей Владимирович"
+    },
+    {
+      "id": "2",
+      "login": "teacher2",
+      "password": "teacher123",
+      "fullName": "Иванова Елена Дмитриевна"
+    },
+    {
+      "id": "3",
+      "login": "teacher3",
+      "password": "teacher123",
+      "fullName": "Петров Сергей Николаевич"
+    },
+    {
+      "id": "4",
+      "login": "teacher4",
+      "password": "teacher123",
+      "fullName": "Козлова Мария Александровна"
+    },
+    {
+      "id": "5",
+      "login": "teacher5",
+      "password": "teacher123",
+      "fullName": "Морозов Андрей Викторович"
     }
   ],
   "students": [
@@ -14,10 +38,57 @@
       "password": "student123",
       "fullName": "Кузнецов Артём Александрович",
       "groupId": 1
+    },
+    {
+      "id": "2",
+      "login": "student2",
+      "password": "student123",
+      "fullName": "Иванова Мария Сергеевна",
+      "groupId": 2
+    },
+    {
+      "id": "3",
+      "login": "student3",
+      "password": "student123",
+      "fullName": "Петров Дмитрий Алексеевич",
+      "groupId": 3
     }
   ],
-  "groups": [],
-  "disciplines": [],
-  "attendance": [],
+  "groups": [
+    { "id": 1, "name": "ИС-21", "teacherId": 1 },
+    { "id": 2, "name": "ИС-22", "teacherId": 1 },
+    { "id": 3, "name": "ИС-23", "teacherId": 2 }
+  ],
+  "disciplines": [
+    { "id": 1, "name": "Программирование на Python", "groupId": 1 },
+    { "id": 2, "name": "Базы данных", "groupId": 1 },
+    { "id": 3, "name": "Веб-разработка", "groupId": 2 }
+  ],
+  "attendance": [
+    {
+      "id": 1,
+      "studentId": 1,
+      "disciplineId": 1,
+      "date": "2026-06-20",
+      "status": "P",
+      "reason": ""
+    },
+    {
+      "id": 2,
+      "studentId": 1,
+      "disciplineId": 2,
+      "date": "2026-06-20",
+      "status": "P",
+      "reason": ""
+    },
+    {
+      "id": 3,
+      "studentId": 2,
+      "disciplineId": 3,
+      "date": "2026-06-20",
+      "status": "N",
+      "reason": "Прогул"
+    }
+  ],
   "polls": []
 }

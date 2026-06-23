@@ -25,13 +25,13 @@ export const AppLayout: React.FC = () => {
     
     if (path === '/student') {
       return {
-        title: 'Главная страница',
-        subtitle: 'Добро пожаловать в систему табеля посещения'
+        title: 'Электронный табель',
+        subtitle: 'Главная'
       };
     } else if (path === '/teacher') {
       return {
-        title: 'Панель преподавателя',
-        subtitle: 'Управление табелями посещения'
+        title: 'Электронный табель',
+        subtitle: 'Главная'
       };
     }
     
