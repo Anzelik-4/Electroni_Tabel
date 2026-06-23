@@ -1,0 +1,123 @@
+.tableWrapper {
+  // Размер по горизонтали
+  width: 1900px;
+  
+  // Внешняя рамка
+  border: 3px solid #2E141F;
+  
+  // Округление
+  border-radius: 15px;
+  
+  // Скрываем переполнение для корректного закругления
+  overflow: hidden;
+  
+  // Чтобы размеры работали правильно
+  box-sizing: border-box;
+}
+
+.table {
+  // Таблица на всю ширину
+  width: 100%;
+  
+  // Убираем стандартные отступы
+  border-collapse: collapse;
+  
+  // Шрифт для всей таблицы
+  font-family: 'Libertinus Serif Display', serif;
+}
+
+// Строка с наименованием столбиков (заголовок)
+.headerRow {
+  // Фон: #5CBFC7 с прозрачностью 30%
+  background: rgba(92, 191, 199, 0.3);
+}
+
+.headerCell {
+  // Текст
+  font-size: 32px;
+  font-weight: 400; // Regular
+  color: #000000;
+  text-align: left;
+  
+  // Высота строки
+  height: 98px;
+  
+  // Внутренние отступы
+  padding: 0 20px;
+  
+  // Выравнивание по левому краю
+  text-align: left;
+  
+  // Вертикальное выравнивание по центру
+  vertical-align: middle;
+  
+  // Первый столбец
+  &:first-child {
+    padding-left: 30px;
+  }
+  
+  // Последний столбец
+  &:last-child {
+    padding-right: 30px;
+  }
+}
+
+// Строки с контентом
+.row {
+  // Фон: белый
+  background: #FFFFFF;
+  
+  // Высота строки
+  height: 98px;
+  
+  // Переход для hover
+  transition: background 0.2s ease;
+  
+  // При наведении на строку (если кликабельна)
+  &.clickable:hover {
+    background: rgba(92, 191, 199, 0.1);
+    cursor: pointer;
+  }
+  
+  // Чередование цветов (опционально)
+  // &:nth-child(even) {
+  //   background: #f9f9f9;
+  // }
+}
+
+.cell {
+  // Текст
+  font-size: 28px;
+  font-weight: 400; // Regular
+  color: #000000;
+  
+  // Высота строки
+  height: 98px;
+  
+  // Внутренние отступы
+  padding: 0 20px;
+  
+  // Выравнивание по левому краю
+  text-align: left;
+  
+  // Вертикальное выравнивание по центру
+  vertical-align: middle;
+  
+  // Граница между строками (опционально)
+  border-bottom: 1px solid rgba(46, 20, 31, 0.1);
+  
+  // Первый столбец
+  &:first-child {
+    padding-left: 30px;
+  }
+  
+  // Последний столбец
+  &:last-child {
+    padding-right: 30px;
+  }
+  
+  // Убираем границу у последней строки
+  .row:last-child & {
+    border-bottom: none;
+  }
+}

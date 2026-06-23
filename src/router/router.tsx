@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import Login from '../components/pages/login/login.tsx';
 import { MainStudent } from '../components/pages/mainStudent/mainStudent.tsx';
 import { MainTeacher } from '../components/pages/mainTeacher/mainTeacher.tsx';
+import { ActivePolls } from '../components/pages/activePolls/activePolls.tsx';
 import { AppLayout } from '../components/layout/appLayout/appLayout.tsx';
 import { getUserRole, isAuthenticated, type UserRole } from '../utils/auth';
 
@@ -48,6 +49,7 @@ export const Router = () => {
       />
       
       <Route element={<AppLayout />}>
+        {/* Главная страница студента */}
         <Route
           path="/student"
           element={
@@ -57,6 +59,17 @@ export const Router = () => {
           }
         />
         
+        {/* Страница активных опросов (только для студента) */}
+        <Route
+          path="/student/polls"
+          element={
+            <ProtectedRoute role="student">
+              <ActivePolls />
+            </ProtectedRoute>
+          }
+        />
+        
+        {/* Главная страница преподавателя */}
         <Route
           path="/teacher"
           element={

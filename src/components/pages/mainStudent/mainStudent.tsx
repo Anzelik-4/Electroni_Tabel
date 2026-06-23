@@ -1,32 +1,32 @@
 import React from 'react';
-import styles from './mainStudent.module.scss';
+import { useNavigate } from 'react-router-dom';
+import styles from './MainStudent.module.scss';
 import { DataCard } from '../../widgets/dataCard/dataCard';
 
 export const MainStudent: React.FC = () => {
-  // Заглушка для будущей логики
+  const navigate = useNavigate();
+
   const handleMarkAttendance = () => {
-    console.log('Переход на раздел "Отметить присутствие"');
-    // TODO: Добавить навигацию на страницу отметки присутствия
+    // Переход на страницу активных опросов
+    navigate('/student/polls');
   };
 
   const handleViewAbsences = () => {
     console.log('Переход на раздел "Просмотр пропусков"');
     // TODO: Добавить навигацию на страницу просмотра пропусков
+    // navigate('/student/absences');
   };
 
   return (
     <div className={styles.mainStudent}>
-      {/* Первый компонент: Заголовок и подзаголовок */}
-      <div className={styles.mainStudent}>
+      <div className={styles.headerSection}>
         <h1 className={styles.title}>Разделы</h1>
         <p className={styles.subtitle}>
           Выберите раздел для отметки присутствия или просмотра своих пропусков
         </p>
       </div>
 
-      {/* Второй компонент: Карточки по горизонтали */}
       <div className={styles.cardsSection}>
-        {/* Первая карточка: Отметить присутствие */}
         <DataCard
           title="Отметить присутствие"
           content="Подтверди своё присутствие на занятиях при помощи активных опросов от преподавателя"
@@ -34,7 +34,6 @@ export const MainStudent: React.FC = () => {
           onButtonClick={handleMarkAttendance}
         />
 
-        {/* Вторая карточка: Просмотр пропусков */}
         <DataCard
           title="Просмотр пропусков"
           content="Просматривай историю своих пропусков по каждой дисциплине"
@@ -45,4 +44,3 @@ export const MainStudent: React.FC = () => {
     </div>
   );
 };
-

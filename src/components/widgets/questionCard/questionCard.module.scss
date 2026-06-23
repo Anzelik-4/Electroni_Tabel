@@ -1,0 +1,146 @@
+// Общие стили для карточки
+.questionCard {
+  // Размеры как у DataCard
+  width: 650px;
+  min-height: 360px;
+
+  // Внутренние отступы
+  padding: 30px 80px;
+
+  // Отступы между элементами
+  gap: 45px;
+
+  // Закругление
+  border-radius: 25px;
+
+  // Внутренняя рамка
+  border: 3px solid #2E141F;
+
+  // Для управления расположением элементов
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  // Чтобы размеры работали правильно
+  box-sizing: border-box;
+}
+
+// Состояние Active (есть опрос)
+.activeState {
+  background: #73304D;
+
+  // Текст в активном состоянии - белый
+  .title,
+  .content {
+    color: #ffffff;
+  }
+}
+
+// Состояние Default (нет опроса)
+.defaultState {
+  background: rgba(115, 48, 77, 0.15);
+
+  // Текст в состоянии по умолчанию
+  .noActiveText {
+    font-family: 'Libertinus Serif Display', serif;
+    font-size: 36px;
+    font-weight: 400; // Regular
+    color: #73304D;
+    text-align: center;
+
+    // Всегда в одну строку
+    white-space: nowrap;
+
+    // Сброс отступов
+    margin: 0;
+  }
+}
+
+.title {
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 48px;
+  font-weight: 400; // Regular
+  text-align: center;
+
+  // Всегда в одну строку
+  white-space: nowrap;
+
+  // Внутренние отступы
+  padding: 10px;
+  gap: 10px;
+
+  // Сброс стандартных отступов
+  margin: 0;
+}
+
+.content {
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 36px;
+  font-weight: 400; // Regular
+  text-align: center;
+
+  // Автоматический перенос текста
+  height: auto;
+  word-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+
+  // Внутренние отступы
+  padding: 10px;
+  gap: 10px;
+
+  // Сброс стандартных отступов
+  margin: 0;
+}
+
+// ========== Стили для уведомлений ==========
+
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  padding: 20px 40px;
+  border-radius: 12px;
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 28px;
+  font-weight: 400;
+  text-align: center;
+
+  min-width: 300px;
+  max-width: 90%;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+
+  // Анимация появления сверху
+  animation: slideDown 0.5s ease forwards;
+
+  // Тип: успех (зелёный)
+  &.success {
+    background: #52c41a;
+    color: #ffffff;
+    border: 2px solid #389e0d;
+  }
+
+  // Тип: ошибка (красный)
+  &.error {
+    background: #ff4d4f;
+    color: #ffffff;
+    border: 2px solid #cf1322;
+  }
+}
+
+// Анимация появления сверху
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

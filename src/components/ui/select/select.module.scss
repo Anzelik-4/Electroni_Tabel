@@ -1,0 +1,210 @@
+.selectWrapper {
+  // Ширина задаётся через пропс
+  position: relative;
+  display: inline-block;
+  
+  // Чтобы размеры работали правильно
+  box-sizing: border-box;
+}
+
+// ========== ПОЛЕ С НАИМЕНОВАНИЕМ ==========
+.selectHeader {
+  // Базовые настройки
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  // Отступы
+  padding: 10px;
+  gap: 10px;
+  
+  // Закругление
+  border-radius: 15px;
+  
+  // Рамка
+  border: 2px solid #2E141F;
+  
+  // Фон
+  background: rgba(202, 202, 202, 0.7); // #CACACA с прозрачностью 70%
+  
+  // Размер текста
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 32px;
+  
+  // Курсор
+  cursor: pointer;
+  
+  // Плавный переход
+  transition: all 0.3s ease;
+  
+  // Чтобы текст не выходил за пределы
+  min-height: 60px;
+  box-sizing: border-box;
+  
+  // Состояние при открытом списке
+  &.open {
+    border-radius: 15px 15px 0 0;
+  }
+  
+  // Состояние disabled
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  // Hover (если не disabled)
+  &:not(.disabled):hover {
+    background: rgba(202, 202, 202, 0.85);
+  }
+}
+
+// Текст (когда выбран)
+.selectedText {
+  color: #000000;
+  font-weight: 400;
+  text-align: left;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Плейсхолдер
+.placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+  text-align: left;
+  flex: 1;
+}
+
+// ========== СТРЕЛОЧКА ==========
+.arrow {
+  font-size: 20px;
+  color: #2E141F;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+}
+
+// ========== ВЫПАДАЮЩИЙ СПИСОК ==========
+.optionsList {
+  // Позиционирование
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  
+  // Убираем маркеры списка
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  // Максимальная высота с прокруткой
+  max-height: 300px;
+  overflow-y: auto;
+  
+  // Закругление
+  border-radius: 0 0 15px 15px;
+  
+  // Рамка (соединяется с полем)
+  border: 2px solid #2E141F;
+  border-top: none;
+  
+  // Фон (чтобы скрыть содержимое под списком)
+  background: rgba(202, 202, 202, 0.95);
+  
+  // Тень для глубины
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  
+  // Анимация появления
+  animation: slideDown 0.2s ease;
+}
+
+// ========== ЭЛЕМЕНТЫ СПИСКА ==========
+.optionItem {
+  // Базовые настройки
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  // Текст
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 32px;
+  color: #000000;
+  text-align: center;
+  
+  // Отступы
+  padding: 12px;
+  gap: 10px;
+  
+  // Закругление
+  border-radius: 25px;
+  
+  // Фон
+  background: rgba(92, 191, 199, 0.15);
+  
+  // Отступ между элементами
+  margin: 4px 8px;
+  
+  // Курсор
+  cursor: pointer;
+  
+  // Плавный переход
+  transition: all 0.2s ease;
+  
+  // Hover
+  &:hover {
+    background: rgba(92, 191, 199, 0.35);
+  }
+  
+  // Выбранный элемент
+  &.selected {
+    background: rgba(92, 191, 199, 0.5);
+    border: 2px solid #2E141F;
+  }
+  
+  // Первый элемент
+  &:first-child {
+    margin-top: 8px;
+  }
+  
+  // Последний элемент
+  &:last-child {
+    margin-bottom: 8px;
+  }
+}
+
+// ========== СКРОЛЛБАР ==========
+.optionsList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.optionsList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.optionsList::-webkit-scrollbar-thumb {
+  background: rgba(46, 20, 31, 0.3);
+  border-radius: 3px;
+}
+
+.optionsList::-webkit-scrollbar-thumb:hover {
+  background: rgba(46, 20, 31, 0.5);
+}
+
+// ========== АНИМАЦИЯ ==========
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

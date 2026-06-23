@@ -1,0 +1,107 @@
+.activePolls {
+  // Разметка страницы
+  padding: 10px;
+  gap: 25px;
+  
+  // Расположение элементов колонкой
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  // Вся доступная ширина
+  width: 100%;
+  
+  // Чтобы размеры работали правильно
+  box-sizing: border-box;
+}
+
+// Секция с кнопкой "Назад"
+.headerSection {
+  // Расположение колонкой
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+  // Выравнивание по левому краю
+  align-items: flex-start;
+  
+  // Вся доступная ширина
+  width: 100%;
+}
+
+// Стили для кнопки "Назад"
+.backButton {
+  // Переопределяем отступы кнопки для компактного вида
+  padding: 14px 40px !important; // Меньше отступов чем у стандартной кнопки
+  font-size: 32px !important;
+  width: auto !important; // Ширина по содержимому
+  min-width: unset !important;
+  
+  // Дополнительно: можно добавить иконку стрелки
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+// Секция с заголовком и подзаголовком
+.titleSection {
+  // Расположение колонкой
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+  // Выравнивание по левому краю
+  align-items: flex-start;
+  
+  // Вся доступная ширина
+  width: 100%;
+}
+
+.title {
+  // Текст
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 48px;
+  font-weight: 400; // Regular
+  color: #000000;
+  
+  // Всегда в одну строку
+  white-space: nowrap;
+  
+  // Выравнивание по левому краю
+  text-align: left;
+  
+  // Сброс стандартных отступов
+  margin: 0;
+}
+
+.subtitle {
+  // Текст
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 36px;
+  font-weight: 400; // Regular
+  color: #000000;
+  
+  // Всегда в одну строку
+  white-space: nowrap;
+  
+  // Выравнивание по левому краю
+  text-align: left;
+  
+  // Сброс стандартных отступов
+  margin: 0;
+}
+
+// Секция с карточкой опроса
+.pollsSection {
+  // Расположение карточки по центру
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  
+  // Вся доступная ширина
+  width: 100%;
+  
+  // Автоматическая высота
+  height: auto;
+}
