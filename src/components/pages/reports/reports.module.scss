@@ -1,0 +1,234 @@
+.reports {
+  padding: 10px;
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.backButton {
+  padding: 14px 40px !important;
+  font-size: 32px !important;
+  width: auto !important;
+  min-width: unset !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.title {
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 48px;
+  font-weight: 400;
+  color: #000000;
+  white-space: nowrap;
+  text-align: left;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: #000000;
+  white-space: nowrap;
+  text-align: left;
+  margin: 0;
+}
+
+.filtersSection {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 0;
+  overflow: visible;
+
+  & > * {
+    flex: 1;
+    min-width: 0;
+    overflow: visible;
+  }
+}
+
+.tableWrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+// ========== ЕЖЕДНЕВНАЯ ТАБЛИЦА ==========
+.dailyTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Times New Roman', serif;
+  font-size: 14px;
+  border: 1px solid #000000;
+
+  th {
+    border: 1px solid #000000;
+    padding: 8px 6px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+
+  td {
+    border: 1px solid #000000;
+    padding: 6px 6px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .studentName {
+    text-align: left;
+    padding-left: 10px;
+  }
+
+  .reasonCell {
+    text-align: left;
+    padding-left: 10px;
+    min-width: 150px;
+  }
+
+  .signatureCell {
+    text-align: left;
+    padding-left: 10px;
+    font-weight: normal;
+  }
+
+  .disciplineHeader {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    font-size: 11px;
+    padding: 4px 4px;
+    min-width: 30px;
+    max-width: 40px;
+  }
+}
+
+// ========== ЕЖЕНЕДЕЛЬНАЯ ТАБЛИЦА ==========
+.weeklyTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Times New Roman', serif;
+  font-size: 10px;
+  border: 1px solid #000000;
+
+  th {
+    border: 1px solid #000000;
+    padding: 4px 3px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+
+  td {
+    border: 1px solid #000000;
+    padding: 4px 3px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .studentName {
+    text-align: left;
+    padding-left: 6px;
+  }
+
+  .headerCell {
+    background-color: #e6e6e6;
+  }
+}
+
+// ========== ЕЖЕМЕСЯЧНАЯ ТАБЛИЦА ==========
+.monthlyTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Times New Roman', serif;
+  font-size: 8px;
+  border: 1px solid #000000;
+
+  th {
+    border: 1px solid #000000;
+    padding: 2px 1px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+
+  td {
+    border: 1px solid #000000;
+    padding: 2px 1px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .studentName {
+    text-align: left;
+    padding-left: 4px;
+    font-size: 8px;
+  }
+
+  .headerCell {
+    background-color: #e6e6e6;
+  }
+}
+
+// ========== ОБЩИЕ СТИЛИ ==========
+.loadingState {
+  padding: 40px;
+  text-align: center;
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 28px;
+  color: #73304D;
+}
+
+.emptyState {
+  padding: 40px;
+  text-align: center;
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 28px;
+  color: #73304D;
+  background: rgba(202, 202, 202, 0.2);
+  border-radius: 15px;
+  border: 2px dashed #2E141F;
+}
+
+.exportSection {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.exportButton {
+  min-width: 250px !important;
+  padding: 14px 40px !important;
+  font-size: 32px !important;
+}

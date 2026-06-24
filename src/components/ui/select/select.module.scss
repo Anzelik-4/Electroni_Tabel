@@ -95,40 +95,45 @@
 
 // ========== ВЫПАДАЮЩИЙ СПИСОК ==========
 .optionsList {
-  // Позиционирование
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 9999; // Поднимаем над всеми элементами
-  
-  // Убираем маркеры списка
+  z-index: 9999;
   list-style: none;
   margin: 0;
-  padding: 0;
-  
-  // Максимальная высота с прокруткой
+  padding: 8px 0; // Добавляем отступы для скролла
   max-height: 300px;
-  overflow-y: auto;
-  
-  // Закругление
+  overflow-y: auto; // Скролл если много элементов
   border-radius: 0 0 15px 15px;
-  
-  // Рамка (соединяется с полем)
   border: 2px solid #2E141F;
   border-top: none;
-  
-  // Фон (чтобы скрыть содержимое под списком)
   background: rgba(202, 202, 202, 0.95);
-  
-  // Тень для глубины
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  
-  // Анимация появления
   animation: slideDown 0.2s ease;
-  
-  // ВАЖНО: не скрываем переполнение
-  overflow: visible;
+
+  // Кастомизация скроллбара
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(46, 20, 31, 0.05);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(46, 20, 31, 0.3);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(46, 20, 31, 0.5);
+  }
+
+  // Для Firefox
+  scrollbar-width: thin;
+  scrollbar-color: rgba(46, 20, 31, 0.3) transparent;
 }
 
 // ========== ЭЛЕМЕНТЫ СПИСКА ==========

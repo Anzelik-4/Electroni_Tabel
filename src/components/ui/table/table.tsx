@@ -1,11 +1,12 @@
 import React from 'react';
-import styles from './table.module.scss';
+import styles from './Table.module.scss';
 
 export interface Column<T> {
   key: string;
   title: string;
   render?: (item: T) => React.ReactNode;
   width?: string | number;
+  className?: string; // Добавляем className для колонок
 }
 
 interface TableProps<T> {
@@ -29,7 +30,7 @@ export const Table = <T,>({
             {columns.map((col) => (
               <th 
                 key={col.key} 
-                className={styles.headerCell}
+                className={`${styles.headerCell} ${col.className || ''}`}
                 style={{ width: col.width }}
               >
                 {col.title}

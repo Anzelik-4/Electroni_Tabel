@@ -7,7 +7,8 @@ interface QuestionCardProps {
   disciplineName?: string;
   onConfirm?: () => void;
   className?: string;
-  autoCloseTimeout?: number; // Время в миллисекундах до автоматического закрытия (по умолчанию 10 минут)
+  autoCloseTimeout?: number;
+  isActive?: boolean; // Новый пропс для управления состоянием извне
 }
 
 export const QuestionCard: React.FC<QuestionCardProps> = ({
@@ -15,50 +16,47 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   disciplineName = 'Дисциплина',
   onConfirm,
   className = '',
-  autoCloseTimeout = 600000, // 10 минут в миллисекундах (600000)
+  autoCloseTimeout = 600000,
+  isActive = true,
 }) => {
-  const [isActive, setIsActive] = useState<boolean>(true);
+  const [internalActive, setInternalActive] = useState<boolean>(isActive);
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
-  // Таймер для автоматического закрытия опроса через 10 минут
+  // Синхронизация с внешним состоянием
   useEffect(() => {
-    if (!isActive) return;
+    setInternalActive(isActive);
+  }, [isActive]);
+
+  // Таймер для автоматического закрытия
+  useEffect(() => {
+    if (!internalActive) return;
 
     const timer = setTimeout(() => {
-      // Закрываем опрос
-      setIsActive(false);
-      // Показываем уведомление
+      setInternalActive(false);
       setNotification({
         message: 'Вы не успели подтвердить присутствие. Доступ к опросу закрыт',
         type: 'error',
       });
 
-      // Скрываем уведомление через 5 секунд
       setTimeout(() => {
         setNotification(null);
       }, 5000);
     }, autoCloseTimeout);
 
-    // Очищаем таймер при размонтировании или изменении isActive
     return () => clearTimeout(timer);
-  }, [isActive, autoCloseTimeout]);
+  }, [internalActive, autoCloseTimeout]);
 
   const handleConfirm = () => {
-    // Переключаем в состояние Default
-    setIsActive(false);
-
-    // Показываем уведомление об успехе
+    setInternalActive(false);
     setNotification({
       message: 'Присутствие подтверждено ✅',
       type: 'success',
     });
 
-    // Скрываем уведомление через 3 секунды
     setTimeout(() => {
       setNotification(null);
     }, 3000);
 
-    // Вызываем переданную функцию, если она есть
     if (onConfirm) {
       onConfirm();
     }
@@ -67,10 +65,9 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   };
 
   // Состояние Default: нет активных опросов
-  if (!isActive) {
+  if (!internalActive) {
     return (
       <>
-        {/* Уведомление */}
         {notification && (
           <div className={`${styles.notification} ${styles[notification.type]}`}>
             {notification.message}
@@ -87,7 +84,6 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   // Состояние Active: есть активный опрос
   return (
     <>
-      {/* Уведомление */}
       {notification && (
         <div className={`${styles.notification} ${styles[notification.type]}`}>
           {notification.message}

@@ -8,9 +8,7 @@
   max-width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
-  
-  // ВАЖНО: чтобы выпадающие списки не обрезались
-  overflow: visible;
+  overflow: visible; // Добавляем, чтобы ничего не обрезалось
 }
 
 // ========== КНОПКА НАЗАД ==========
@@ -77,6 +75,8 @@
   width: 100%;
   max-width: 100%;
   overflow: hidden;
+  border-radius: 15px; // Добавляем закругление
+  border: 3px solid #2E141F; // Переносим рамку сюда
 }
 
 .tableScroll {
@@ -85,6 +85,10 @@
   max-height: 600px;
   overflow-y: auto;
   overflow-x: hidden;
+  
+  // Убираем border отсюда, чтобы не дублировать
+  // border: 3px solid #2E141F;
+  // border-radius: 15px;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -107,23 +111,52 @@
 
   scrollbar-width: thin;
   scrollbar-color: rgba(46, 20, 31, 0.3) rgba(46, 20, 31, 0.05);
+
+  // Добавляем отступ снизу для последней строки
+  padding-bottom: 4px;
 }
 
-// ========== ПУСТОЕ СОСТОЯНИЕ ==========
-.emptyState {
+.table {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 20px;
-  background: rgba(202, 202, 202, 0.2);
-  border-radius: 15px;
-  border: 2px dashed #2E141F;
+  border-collapse: collapse;
+  font-family: 'Libertinus Serif Display', serif;
 
-  p {
-    font-family: 'Libertinus Serif Display', serif;
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  th {
+    background: rgba(92, 191, 199, 0.3);
     font-size: 32px;
-    color: #73304D;
-    margin: 0;
+    font-weight: 400;
+    color: #000000;
+    text-align: left;
+    padding: 20px;
+    height: 98px;
+    border-bottom: 3px solid #2E141F;
+  }
+
+  td {
+    padding: 12px 20px;
+    height: 98px;
+    font-size: 28px;
+    color: #000000;
+    border-bottom: 1px solid rgba(46, 20, 31, 0.1);
+    vertical-align: middle;
+  }
+
+  tbody tr {
+    background: #FFFFFF;
+    
+    &:hover {
+      background: rgba(92, 191, 199, 0.05);
+    }
+    
+    // Убираем границу у последней строки
+    &:last-child td {
+      border-bottom: none;
+    }
   }
 }

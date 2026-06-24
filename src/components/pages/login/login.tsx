@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState } from 'react'; // Убираем FormEvent из импорта
 import { useNavigate } from 'react-router-dom';
 import styles from './login.module.scss';
 import { Logo } from '../../ui/logo/logo';
@@ -15,8 +15,9 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Отменяем перезагрузку страницы
+  // Используем React.FormEvent вместо FormEvent
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setError('');
     setLoading(true);
 
@@ -28,10 +29,8 @@ const Login: React.FC = () => {
         return;
       }
 
-      // Сохраняем сессию
       setAuth(user, generateToken());
       
-      // Перенаправляем в зависимости от роли
       navigate(user.role === 'student' ? '/student' : '/teacher');
     } catch {
       setError('Не удалось подключиться к серверу. Запустите npm run dev');

@@ -105,3 +105,16 @@
   // Автоматическая высота
   height: auto;
 }
+
+// ========== СООБЩЕНИЕ ОБ ОШИБКЕ ==========
+.errorMessage {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 77, 79, 0.1);
+  border: 2px solid #ff4d4f;
+  border-radius: 12px;
+  color: #ff4d4f;
+  font-family: 'Libertinus Serif Display', serif;
+  font-size: 28px;
+  text-align: center;
+}

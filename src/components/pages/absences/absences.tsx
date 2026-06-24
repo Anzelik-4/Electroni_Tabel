@@ -8,7 +8,6 @@ import { Table } from '../../ui/table/table';
 import type { Column } from '../../ui/table/table';
 import { getUser } from '../../../utils/auth';
 
-// Типы данных
 interface AttendanceRecord {
   id: string;
   studentId: number;
@@ -44,28 +43,40 @@ export const Absences: React.FC = () => {
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
 
-  // Загрузка данных из базы
+  // Загрузка ВСЕХ дисциплин (не только тех, что у студента)
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDisciplines = async () => {
       try {
-        const disciplinesRes = await fetch(`/api/disciplines?groupId=${user?.groupId}`);
-        const disciplinesData = await disciplinesRes.json();
-        setDisciplines(disciplinesData);
-
-        const attendanceRes = await fetch(`/api/attendance?studentId=${user?.id}`);
-        const attendanceData = await attendanceRes.json();
-        setAttendance(attendanceData);
+        // Загружаем все дисциплины из базы
+        const response = await fetch('/api/disciplines');
+        const data = await response.json();
+        setDisciplines(data);
       } catch (error) {
-        console.error('Ошибка загрузки данных:', error);
+        console.error('Ошибка загрузки дисциплин:', error);
       }
     };
 
-    if (user?.id && user?.groupId) {
-      fetchData();
-    }
+    fetchDisciplines();
+  }, []);
+
+  // Загрузка записей посещаемости студента
+  useEffect(() => {
+    const fetchAttendance = async () => {
+      if (!user?.id) return;
+      
+      try {
+        const response = await fetch(`/api/attendance?studentId=${user.id}`);
+        const data = await response.json();
+        setAttendance(data);
+      } catch (error) {
+        console.error('Ошибка загрузки посещаемости:', error);
+      }
+    };
+
+    fetchAttendance();
   }, [user]);
 
-  // Фильтрация данных при изменении фильтров
+  // Фильтрация данных
   useEffect(() => {
     if (!selectedPeriod || !selectedDiscipline) {
       setFilteredData([]);
@@ -151,6 +162,7 @@ export const Absences: React.FC = () => {
     { value: 'month', label: 'За месяц' },
   ];
 
+  // Все дисциплины из базы
   const disciplineOptions: SelectOption[] = disciplines.map((d) => ({
     value: String(d.id),
     label: d.name,

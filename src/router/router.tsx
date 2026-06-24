@@ -7,6 +7,10 @@ import { ActivePolls } from '../components/pages/activePolls/activePolls.tsx';
 import { AppLayout } from '../components/layout/appLayout/appLayout.tsx';
 import { getUserRole, isAuthenticated, type UserRole } from '../utils/auth';
 import { Absences } from '../components/pages/absences/absences.tsx';
+import { Teaching } from '../components/pages/teaching/teaching.tsx';
+import { Curatorship } from '../components/pages/curatorship/curatorship.tsx';
+import { Reports } from '../components/pages/reports/reports.tsx';
+import { EditGroup } from '../components/pages/editGroup/editGroup.tsx';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -89,6 +93,47 @@ export const Router = () => {
             </ProtectedRoute>
           }
         />
+
+        {/* Страница преподавание (только преподаватель) */}
+        <Route
+          path="/teacher/teaching"
+          element={
+            <ProtectedRoute role="teacher">
+              <Teaching />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Страница раздела кураторство (только преподаватель) */}
+        <Route
+          path="/teacher/curatorship"
+          element={
+            <ProtectedRoute role="teacher">
+              <Curatorship />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Страница отчетности своей группы (только преподаватель) */}
+        <Route
+          path="/teacher/reports"
+          element={
+            <ProtectedRoute role="teacher">
+              <Reports />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Страница редактирования списка своей группы (только преподаватель) */}
+        <Route
+          path="/teacher/edit-group"
+          element={
+            <ProtectedRoute role="teacher">
+              <EditGroup />
+            </ProtectedRoute>
+          }
+        />
+
       </Route>
       
       <Route path="/" element={<Navigate to="/login" replace />} />

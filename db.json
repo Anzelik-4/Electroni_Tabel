@@ -52,43 +52,146 @@
       "password": "student123",
       "fullName": "Петров Дмитрий Алексеевич",
       "groupId": 3
+    },
+    {
+      "fullName": "Сидоров Андрей Петрович",
+      "login": "student4",
+      "password": "student123",
+      "groupId": 3,
+      "id": "_if-HwTUdn0"
     }
   ],
   "groups": [
-    { "id": 1, "name": "ИС-21", "teacherId": 1 },
-    { "id": 2, "name": "ИС-22", "teacherId": 1 },
-    { "id": 3, "name": "ИС-23", "teacherId": 2 }
+    {
+      "id": "1",
+      "name": "ИС-21",
+      "teacherId": 1
+    },
+    {
+      "id": "2",
+      "name": "ИС-22",
+      "teacherId": 1
+    },
+    {
+      "id": "3",
+      "name": "ИС-23",
+      "teacherId": 2
+    }
   ],
   "disciplines": [
-    { "id": 1, "name": "Программирование на Python", "groupId": 1 },
-    { "id": 2, "name": "Базы данных", "groupId": 1 },
-    { "id": 3, "name": "Веб-разработка", "groupId": 2 }
+    {
+      "id": "1",
+      "name": "Программирование на Python",
+      "groupId": 1
+    },
+    {
+      "id": "2",
+      "name": "Базы данных",
+      "groupId": 1
+    },
+    {
+      "id": "3",
+      "name": "Веб-разработка",
+      "groupId": 2
+    }
   ],
   "attendance": [
     {
-      "id": 1,
+      "studentId": 3,
+      "disciplineId": 3,
+      "date": "2026-06-24",
+      "status": "P",
+      "reason": "",
+      "id": "VuBjdn5h3_Y"
+    },
+    {
       "studentId": 1,
       "disciplineId": 1,
-      "date": "2026-06-20",
+      "date": "2026-06-24",
       "status": "P",
-      "reason": ""
+      "reason": "",
+      "id": "1t9U2o3xxDc"
     },
     {
-      "id": 2,
-      "studentId": 1,
-      "disciplineId": 2,
-      "date": "2026-06-20",
-      "status": "P",
-      "reason": ""
-    },
-    {
-      "id": 3,
       "studentId": 2,
+      "disciplineId": 2,
+      "date": "2026-06-24",
+      "status": "P",
+      "reason": "",
+      "id": "WM5--BoBE_Y"
+    },
+    {
+      "studentId": 1,
       "disciplineId": 3,
-      "date": "2026-06-20",
-      "status": "N",
-      "reason": "Прогул"
+      "date": "2026-06-24",
+      "status": "P",
+      "reason": "",
+      "id": "2aTk-qFCK3A"
+    },
+    {
+      "studentId": "2",
+      "disciplineId": 1,
+      "date": "2026-06-24",
+      "status": "P",
+      "reason": "",
+      "id": "lVnniTcfE5w"
     }
   ],
-  "polls": []
+  "polls": [
+    {
+      "disciplineId": 3,
+      "teacherId": "1",
+      "groupId": 3,
+      "startedAt": "2026-06-24T13:54:41.522Z",
+      "expiresAt": "2026-06-24T14:04:41.522Z",
+      "active": false,
+      "id": "UR7gBcRCvT4"
+    },
+    {
+      "disciplineId": 1,
+      "teacherId": "1",
+      "groupId": 1,
+      "startedAt": "2026-06-24T14:15:38.552Z",
+      "expiresAt": "2026-06-24T14:25:38.552Z",
+      "active": false,
+      "id": "Zz9WX8utsz0"
+    },
+    {
+      "disciplineId": 1,
+      "teacherId": "1",
+      "groupId": 1,
+      "startedAt": "2026-06-24T14:31:49.134Z",
+      "expiresAt": "2026-06-24T14:41:49.134Z",
+      "active": false,
+      "id": "jQARgXolt1A"
+    },
+    {
+      "disciplineId": 2,
+      "teacherId": "1",
+      "groupId": 2,
+      "startedAt": "2026-06-24T15:15:52.281Z",
+      "expiresAt": "2026-06-24T15:25:52.281Z",
+      "active": false,
+      "id": "vBXvDzayP6s"
+    },
+    {
+      "disciplineId": 3,
+      "teacherId": "1",
+      "groupId": 1,
+      "startedAt": "2026-06-24T15:51:58.220Z",
+      "expiresAt": "2026-06-24T16:01:58.220Z",
+      "active": false,
+      "id": "XWnvnt0hcFE"
+    },
+    {
+      "disciplineId": 1,
+      "teacherId": "1",
+      "groupId": 2,
+      "startedAt": "2026-06-24T16:16:48.845Z",
+      "expiresAt": "2026-06-24T16:26:48.845Z",
+      "active": false,
+      "id": "JkJtNicFlwQ"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
