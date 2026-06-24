@@ -12,9 +12,7 @@ export const MainStudent: React.FC = () => {
   };
 
   const handleViewAbsences = () => {
-    console.log('Переход на раздел "Просмотр пропусков"');
-    // TODO: Добавить навигацию на страницу просмотра пропусков
-    // navigate('/student/absences');
+    navigate('/student/absences');
   };
 
   return (

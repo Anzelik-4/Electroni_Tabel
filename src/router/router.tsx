@@ -6,6 +6,7 @@ import { MainTeacher } from '../components/pages/mainTeacher/mainTeacher.tsx';
 import { ActivePolls } from '../components/pages/activePolls/activePolls.tsx';
 import { AppLayout } from '../components/layout/appLayout/appLayout.tsx';
 import { getUserRole, isAuthenticated, type UserRole } from '../utils/auth';
+import { Absences } from '../components/pages/absences/absences.tsx';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -65,6 +66,16 @@ export const Router = () => {
           element={
             <ProtectedRoute role="student">
               <ActivePolls />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Страница просмотра пропусков (только для студента) */}
+        <Route
+          path="/student/absences"
+          element={
+            <ProtectedRoute role="student">
+              <Absences />
             </ProtectedRoute>
           }
         />
