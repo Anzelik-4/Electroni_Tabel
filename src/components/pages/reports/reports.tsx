@@ -103,7 +103,7 @@ export const Reports: React.FC = () => {
     }
   }, [user]);
 
-  // Загрузка всех дисциплин
+  // Загрузка ВСЕХ дисциплин (без фильтрации по группе)
   useEffect(() => {
     const fetchDisciplines = async () => {
       try {
@@ -202,12 +202,14 @@ export const Reports: React.FC = () => {
     fetchData();
   }, [selectedGroup, students, reportType]);
 
+  // ========== ЕЖЕДНЕВНЫЙ ОТЧЁТ (ВСЕ ДИСЦИПЛИНЫ) ==========
   const fetchDailyReport = async () => {
     const today = new Date().toISOString().split('T')[0];
     const response = await fetch(`/api/attendance?date=${today}`);
     const allRecords = await response.json();
 
-    const groupDisciplines = disciplines.filter(d => d.groupId === Number(selectedGroup));
+    // Используем ВСЕ дисциплины из базы данных
+    const allDisciplines = disciplines;
 
     const report: DailyReportRow[] = students.map((student, index) => {
       const studentRecords = allRecords.filter(
@@ -215,7 +217,9 @@ export const Reports: React.FC = () => {
       );
 
       const disciplinesStatus: { [key: string]: string } = {};
-      groupDisciplines.forEach((discipline) => {
+      
+      // Для КАЖДОЙ дисциплины из базы ищем запись
+      allDisciplines.forEach((discipline) => {
         const record = studentRecords.find(
           (r: AttendanceRecord) => r.disciplineId === discipline.id
         );
@@ -394,8 +398,9 @@ export const Reports: React.FC = () => {
     }
 
     const groupName = groups.find(g => String(g.id) === selectedGroup)?.name || '';
-    const groupDisciplines = disciplines.filter(d => d.groupId === Number(selectedGroup));
-    
+    // Используем ВСЕ дисциплины
+    const allDisciplines = disciplines;
+
     let htmlContent = `
       <html xmlns:o='urn:schemas-microsoft-com:office:office' 
             xmlns:w='urn:schemas-microsoft-com:office:word' 
@@ -418,11 +423,11 @@ export const Reports: React.FC = () => {
         <tr>
           <th rowspan="2" style="width: 30px;">№ п/п</th>
           <th rowspan="2" style="width: 150px;">Ф. И. обучающегося</th>
-          <th colspan="${groupDisciplines.length}" style="text-align: center;">Наименование дисциплин</th>
+          <th colspan="${allDisciplines.length}" style="text-align: center;">Наименование дисциплин</th>
           <th rowspan="2" style="width: 150px;">Причина отсутствия обучающегося на занятиях (заполняет кл. руководитель)</th>
         </tr>
         <tr>
-          ${groupDisciplines.map(() => `<th style="width: 30px;"> </th>`).join('')}
+          ${allDisciplines.map(() => `<th style="width: 30px;"> </th>`).join('')}
         </tr>
       </thead>
       <tbody>
@@ -430,15 +435,14 @@ export const Reports: React.FC = () => {
           <tr>
             <td>${row.number}</td>
             <td class="student-name">${row.studentName}</td>
-            ${groupDisciplines.map((d) => `<td>${row.disciplines[d.id] || ''}</td>`).join('')}
+            ${allDisciplines.map((d) => `<td>${row.disciplines[d.id] || ''}</td>`).join('')}
             <td class="reason-cell">${row.reason}</td>
           </tr>
         `).join('')}
         <tr>
-          <td colspan="2" style="text-align: left; padding-left: 6px;">
+          <td colspan="${2 + allDisciplines.length}" style="text-align: left; padding-left: 6px;">
             <b>Подпись преподавателя каждой дисциплины</b>
           </td>
-          ${groupDisciplines.map(() => `<td></td>`).join('')}
           <td></td>
         </tr>
       </tbody>
@@ -692,7 +696,8 @@ export const Reports: React.FC = () => {
     }
 
     if (reportType === 'daily') {
-      const groupDisciplines = disciplines.filter(d => d.groupId === Number(selectedGroup));
+      // Используем ВСЕ дисциплины
+      const allDisciplines = disciplines;
       
       if (dailyData.length === 0) {
         return <div className={styles.emptyState}>Нет данных для отчёта</div>;
@@ -706,11 +711,11 @@ export const Reports: React.FC = () => {
                 <tr>
                   <th rowSpan={2}>№ п/п</th>
                   <th rowSpan={2}>Ф. И. обучающегося</th>
-                  <th colSpan={groupDisciplines.length}>Наименование дисциплин</th>
+                  <th colSpan={allDisciplines.length}>Наименование дисциплин</th>
                   <th rowSpan={2}>Причина отсутствия обучающегося на занятиях (заполняет кл. руководитель)</th>
                 </tr>
                 <tr>
-                  {groupDisciplines.map((d) => (
+                  {allDisciplines.map((d) => (
                     <th key={d.id} className={styles.disciplineHeader}>{d.name}</th>
                   ))}
                 </tr>
@@ -720,19 +725,16 @@ export const Reports: React.FC = () => {
                   <tr key={row.number}>
                     <td>{row.number}</td>
                     <td className={styles.studentName}>{row.studentName}</td>
-                    {groupDisciplines.map((d) => (
+                    {allDisciplines.map((d) => (
                       <td key={d.id}>{row.disciplines[d.id] || ''}</td>
                     ))}
                     <td className={styles.reasonCell}>{row.reason}</td>
                   </tr>
                 ))}
                 <tr>
-                  <td colSpan={2} className={styles.signatureCell}>
+                  <td colSpan={2 + allDisciplines.length} className={styles.signatureCell}>
                     <b>Подпись преподавателя каждой дисциплины</b>
                   </td>
-                  {groupDisciplines.map((d) => (
-                    <td key={d.id}></td>
-                  ))}
                   <td></td>
                 </tr>
               </tbody>

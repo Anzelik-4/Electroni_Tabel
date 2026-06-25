@@ -251,23 +251,22 @@ export const Teaching: React.FC = () => {
     loadTableData();
   }, [selectedDiscipline, selectedGroup, students]);
 
-  // Автообновление во время опроса
+    // ========== ПЕРИОДИЧЕСКОЕ ОБНОВЛЕНИЕ ТАБЛИЦЫ (КАЖДЫЕ 15 СЕКУНД) ==========
   useEffect(() => {
     if (isPollActive) {
-      // Интервал для проверки новых подтверждений (каждые 2 секунды)
-      pollCheckRef.current = setInterval(() => {
-        checkStudentConfirmations();
-      }, 2000);
-
-      // Интервал для обновления таблицы (каждые 3 секунды)
-      intervalRef.current = setInterval(() => {
-        loadTableData();
-      }, 3000);
-    } else {
-      if (pollCheckRef.current) {
-        clearInterval(pollCheckRef.current);
-        pollCheckRef.current = null;
+      // Очищаем предыдущий интервал
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
+      
+      console.log('🔄 Запуск периодического обновления таблицы (каждые 15 секунд)');
+      
+      intervalRef.current = setInterval(() => {
+        console.log('⏰ Принудительное обновление таблицы...');
+        loadTableData();
+      }, 15000); // ← 15 секунд
+    } else {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
@@ -275,16 +274,12 @@ export const Teaching: React.FC = () => {
     }
 
     return () => {
-      if (pollCheckRef.current) {
-        clearInterval(pollCheckRef.current);
-        pollCheckRef.current = null;
-      }
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
     };
-  }, [isPollActive]);
+  }, [isPollActive, selectedDiscipline, selectedGroup, students]);
 
   // Таймер для опроса
   useEffect(() => {

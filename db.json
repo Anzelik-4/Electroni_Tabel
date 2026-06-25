@@ -135,6 +135,22 @@
       "status": "P",
       "reason": "",
       "id": "lVnniTcfE5w"
+    },
+    {
+      "studentId": "3",
+      "disciplineId": 1,
+      "date": "2026-06-25",
+      "status": "P",
+      "reason": "",
+      "id": "2vor0ytL8ko"
+    },
+    {
+      "studentId": "_if-HwTUdn0",
+      "disciplineId": 1,
+      "date": "2026-06-25",
+      "status": "N",
+      "reason": "",
+      "id": "ySfStF8AOPI"
     }
   ],
   "polls": [
@@ -191,6 +207,24 @@
       "expiresAt": "2026-06-24T16:26:48.845Z",
       "active": false,
       "id": "JkJtNicFlwQ"
+    },
+    {
+      "disciplineId": 1,
+      "teacherId": "1",
+      "groupId": 2,
+      "startedAt": "2026-06-25T04:54:18.470Z",
+      "expiresAt": "2026-06-25T05:04:18.470Z",
+      "active": false,
+      "id": "3ZHffi1COdI"
+    },
+    {
+      "disciplineId": 1,
+      "teacherId": "2",
+      "groupId": 3,
+      "startedAt": "2026-06-25T05:21:14.330Z",
+      "expiresAt": "2026-06-25T05:31:14.330Z",
+      "active": false,
+      "id": "GROjtHlX1vY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

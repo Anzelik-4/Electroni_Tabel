@@ -28,6 +28,11 @@ interface Teacher {
   fullName: string;
 }
 
+interface Student {
+  id: string;
+  groupId: number;
+}
+
 export const ActivePolls: React.FC = () => {
   const navigate = useNavigate();
   const user = getUser();
@@ -59,6 +64,38 @@ export const ActivePolls: React.FC = () => {
     }
   };
 
+  // Проверка, все ли студенты группы отметились
+  const checkAllStudentsConfirmed = async (poll: Poll): Promise<boolean> => {
+    try {
+      // Получаем всех студентов группы
+      const studentsRes = await fetch(`/api/students?groupId=${poll.groupId}`);
+      const students: Student[] = await studentsRes.json();
+      
+      const today = new Date().toISOString().split('T')[0];
+      
+      // Получаем все отметки за сегодня по этой дисциплине
+      const attendanceRes = await fetch(
+        `/api/attendance?disciplineId=${poll.disciplineId}&date=${today}`
+      );
+      const attendanceRecords = await attendanceRes.json();
+      
+      // Считаем, сколько студентов уже отметились
+      const confirmedStudentIds = new Set(
+        attendanceRecords.map((r: any) => r.studentId)
+      );
+      
+      // Проверяем, все ли студенты из группы отметились
+      const allConfirmed = students.every((student) => 
+        confirmedStudentIds.has(student.id)
+      );
+      
+      return allConfirmed;
+    } catch (error) {
+      console.error('Ошибка проверки отметок студентов:', error);
+      return false;
+    }
+  };
+
   // Проверка активных опросов
   const checkActivePoll = async () => {
     if (stopSearch || hasConfirmed) return;
@@ -84,36 +121,54 @@ export const ActivePolls: React.FC = () => {
           });
           setActivePoll(null);
           setError('');
-        } else {
-          const alreadyAttended = await checkTodayAttendance(currentPoll.disciplineId);
-          
-          if (alreadyAttended) {
-            setHasConfirmed(true);
-            setStopSearch(true);
-            setActivePoll(null);
-            
-            setIsLoading(false);
-            return;
-          }
-          
-          setActivePoll(currentPoll);
-          setStopSearch(true);
-          
-          if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-          }
-          
-          const discRes = await fetch(`/api/disciplines/${currentPoll.disciplineId}`);
-          const discData: Discipline = await discRes.json();
-          setDisciplineName(discData.name);
-          
-          const teacherRes = await fetch(`/api/teachers/${currentPoll.teacherId}`);
-          const teacherData: Teacher = await teacherRes.json();
-          setTeacherName(teacherData.fullName);
-          
-          setError('');
+          return;
         }
+        
+        // Проверяем, не отметился ли студент уже по этой дисциплине сегодня
+        const alreadyAttended = await checkTodayAttendance(currentPoll.disciplineId);
+        
+        if (alreadyAttended) {
+          setHasConfirmed(true);
+          setStopSearch(true);
+          setActivePoll(null);
+          setIsLoading(false);
+          return;
+        }
+        
+        // Проверяем, все ли студенты уже отметились
+        const allConfirmed = await checkAllStudentsConfirmed(currentPoll);
+        
+        if (allConfirmed) {
+          // Все студенты отметились! Деактивируем опрос
+          await fetch(`/api/polls/${currentPoll.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ active: false }),
+          });
+          setActivePoll(null);
+          setError('Все студенты уже отметились!');
+          setIsLoading(false);
+          return;
+        }
+        
+        // Опрос активен и студент ещё не отмечался
+        setActivePoll(currentPoll);
+        setStopSearch(true);
+        
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
+        
+        const discRes = await fetch(`/api/disciplines/${currentPoll.disciplineId}`);
+        const discData: Discipline = await discRes.json();
+        setDisciplineName(discData.name);
+        
+        const teacherRes = await fetch(`/api/teachers/${currentPoll.teacherId}`);
+        const teacherData: Teacher = await teacherRes.json();
+        setTeacherName(teacherData.fullName);
+        
+        setError('');
       } else {
         setActivePoll(null);
         setError('');
@@ -153,14 +208,7 @@ export const ActivePolls: React.FC = () => {
     }
 
     try {
-      // 1. ДЕАКТИВИРУЕМ ОПРОС В БАЗЕ ДАННЫХ
-      await fetch(`/api/polls/${activePoll.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ active: false }),
-      });
-
-      // 2. Сохраняем временную отметку в localStorage
+      // 1. Сохраняем временную отметку в localStorage
       const today = new Date().toISOString().split('T')[0];
       const tempKey = `temp_attendance_${activePoll.disciplineId}_${today}`;
       const tempData = JSON.parse(localStorage.getItem(tempKey) || '{}');
@@ -170,6 +218,19 @@ export const ActivePolls: React.FC = () => {
         reason: ''
       };
       localStorage.setItem(tempKey, JSON.stringify(tempData));
+
+      // 2. Проверяем, все ли студенты уже отметились
+      const allConfirmed = await checkAllStudentsConfirmed(activePoll);
+      
+      if (allConfirmed) {
+        // Все студенты отметились! Деактивируем опрос
+        await fetch(`/api/polls/${activePoll.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ active: false }),
+        });
+        console.log('✅ Все студенты отметились! Опрос завершён.');
+      }
 
       // 3. Обновляем состояние
       setHasConfirmed(true);
@@ -181,7 +242,7 @@ export const ActivePolls: React.FC = () => {
         intervalRef.current = null;
       }
       
-      console.log('✅ Присутствие подтверждено! Уведомление отправлено преподавателю.');
+      console.log('✅ Присутствие подтверждено!');
       
     } catch (error) {
       console.error('❌ Ошибка подтверждения присутствия:', error);
